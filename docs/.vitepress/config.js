@@ -1,4 +1,4 @@
-export default {
+﻿export default {
   title: 'Anystat 文档',
   description: '零基础入门指南：Anystat 可视化数据分析 Agent 使用手册',
   base: '/Anystat_doc_web.github.io/',
@@ -15,8 +15,8 @@ export default {
       '/': [
         { text: 'Anystat简介', link: '/' },
         { text: '安装部署', link: '/installation' },
-        { 
-          text: '教程与展示', 
+        {
+          text: '教程与展示',
           link: '/tutorial',
           children: [
             { text: '首次启动与API配置', link: '/tutorial/startup' },
