@@ -28,6 +28,8 @@
 2. 在 `Build and deployment` 部分，确保以下设置：
    - `Source`: 选择 `GitHub Actions`（这表示使用GitHub Actions进行构建和部署）
    - 如果之前设置了其他Source，请更改为`GitHub Actions`
+   
+   > 注意：如果您的仓库是第一次配置GitHub Pages，可能需要等待几分钟让GitHub初始化相关资源
 
 ### 1.4 配置Actions权限
 
@@ -117,6 +119,22 @@ git push origin main
 3. 图片和链接是否正确显示
 4. 页面排版和样式是否与本地预览一致
 
+## 部署方案比较与选择指南
+
+为了解决GitHub Pages部署问题，我为您提供了两种部署方案，您可以根据自己的需求选择：
+
+### 方案A：GitHub Actions Pages部署（原有方案）
+- **特点**：使用GitHub官方的Actions Pages部署方式
+- **优势**：与GitHub Pages服务深度集成
+- **要求**：需要在GitHub Pages设置中选择"GitHub Actions"作为Source
+- **适用场景**：已正确配置GitHub Pages的仓库
+
+### 方案B：gh-pages分支部署（推荐备用方案）
+- **特点**：使用广泛验证的gh-pages分支部署方法
+- **优势**：配置简单，兼容性好，不需要复杂的GitHub Pages设置
+- **要求**：需要在GitHub Pages设置中选择"Deploy from a branch"，并指定gh-pages分支
+- **适用场景**：新仓库或遇到官方Actions部署问题的仓库
+
 ## 步骤9：GitHub Actions工作流详解
 
 项目中的GitHub Actions工作流(`.github/workflows/deploy.yml`)会自动处理构建和部署过程：
@@ -146,6 +164,57 @@ env:
 这个环境变量确保VitePress在构建时使用正确的基础路径。
 
 ### 工作流包含两个主要任务
+
+## 步骤10：常见部署问题与解决方案
+
+### 10.1 错误："Cannot find any run with github.run_id" 和 "Failed to create deployment (status: 404)"
+
+如果您在GitHub Actions中看到这些错误，通常是因为GitHub Pages尚未在您的仓库中正确启用。我已经为您提供了两种解决方案：
+
+### 方案A：修复现有部署配置
+
+按照以下步骤解决：
+
+1. **确保GitHub Pages已正确启用**：
+   - 登录GitHub，进入您的仓库 `https://github.com/Anthony-Li-Anran/Anystat_doc_web.github.io`
+   - 点击 **Settings** > **Pages**
+   - 在 **Build and deployment** 部分，确保 **Source** 设置为 `GitHub Actions`
+   - 如果没有看到此选项，可能需要等待几分钟让GitHub初始化Pages资源
+   - 保存设置后，等待几分钟，然后重新触发部署
+
+2. **重新触发部署**：
+   - 可以通过再次推送代码到main分支来触发
+   - 或者在GitHub仓库的Actions页面中，手动触发工作流
+
+3. **检查Actions权限**：
+   - 确保在 **Settings** > **Actions** > **General** 中，Workflow permissions设置为 `Read and write permissions`
+   - 确保勾选了 `Allow GitHub Actions to create and approve pull requests` 选项
+
+### 方案B：使用备用部署方案（推荐）
+
+我已经为您创建了一个更稳定的备用部署方案 `simple_deploy.yml`，它使用了广泛验证的gh-pages部署方法：
+
+1. 这个方案会自动：
+   - 构建您的VitePress文档
+   - 将构建产物部署到专门的`gh-pages`分支
+   - 不需要复杂的GitHub Pages Actions配置
+
+2. 使用方法：
+   - 登录GitHub，进入您的仓库 `https://github.com/Anthony-Li-Anran/Anystat_doc_web.github.io`
+   - 点击 **Settings** > **Pages**
+   - 在 **Build and deployment** 部分，将 **Source** 设置为 `Deploy from a branch`
+   - 在 **Branch** 下拉菜单中，选择 `gh-pages` 和 `/ (root)`
+   - 点击 **Save** 保存设置
+
+3. 触发部署：
+   - 推送任何更改到main分支，或者
+   - 在GitHub Actions页面手动触发"Deploy VitePress site to GitHub Pages (Simple Method)"工作流
+
+### 10.2 部署成功但网站无法访问
+
+1. 等待几分钟，GitHub Pages可能需要一些时间来发布您的网站
+2. 检查您的仓库名称和config.js中的`base`路径是否匹配
+3. 确认您访问的URL格式正确：`https://[用户名].github.io/Anystat_doc_web.github.io/`
 
 1. **build**：负责构建文档网站
 2. **deploy**：负责将构建结果部署到GitHub Pages
