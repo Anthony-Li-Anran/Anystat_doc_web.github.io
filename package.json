@@ -1,0 +1,25 @@
+{
+  "name": "anystat_doc_web.github.io",
+  "version": "1.0.0",
+  "description": "Anystat数据分析助手官方文档",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anthony-Li-Anran/Anystat_doc_web.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anthony-Li-Anran/Anystat_doc_web.github.io/issues"
+  },
+  "homepage": "https://github.com/Anthony-Li-Anran/Anystat_doc_web.github.io#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
