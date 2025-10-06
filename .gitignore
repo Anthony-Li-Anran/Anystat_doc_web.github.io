@@ -51,6 +51,7 @@ Thumbs.db
 .DS_Store
 
 # Package manager files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# package-lock.json, yarn.lock和pnpm-lock.yaml不应该被忽略，因为它们确保依赖版本一致性
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
